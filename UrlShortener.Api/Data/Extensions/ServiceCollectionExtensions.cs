@@ -1,5 +1,3 @@
-using Confi;
-
 using Microsoft.EntityFrameworkCore;
 
 namespace UrlShortener.Api.Data.Extensions;
@@ -14,7 +12,7 @@ public static class ServiceCollectionExtensions
         return services.AddDbContext<TContext>((sp, opts) =>
         {
             var config = sp.GetRequiredService<IConfiguration>();
-            var connectionString = config.GetRequiredValue(configPath);
+            var connectionString = config.GetValue<string>(configPath);
             opts.UseNpgsql(connectionString)
                 .UseSnakeCaseNamingConvention();
         });

@@ -1,42 +1,45 @@
+using UrlShortener.Api.Application.Extensions;
 using UrlShortener.Api.Data;
 using UrlShortener.Api.Data.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+builder.Logging.ClearProviders();
 builder.Logging.AddSimpleConsole(c => c.SingleLine = true);
 
-builder.Services.AddPostgresDbContext<UrlShortenerDbContext>();
+builder.Services.AddHttpContextAccessor();
+builder.Services.AddCookieAuthentication();
+builder.Services.AddAuthorization();
 
+builder.Services.AddPostgresDbContext<UrlShortenerDbContext>();
+builder.Services.AddCQRSMediator();
+
+builder.Services.AddSwaggerGen();
 builder.Services.AddControllersWithViews();
-builder.Services.AddOpenApiDocument();
 
 var app = builder.Build();
 
 if (app.Environment.IsDevelopment())
 {
-    // automatic DB migration
+    // Automatic DB migration
     app.Services.MigrateDatabase<UrlShortenerDbContext>();
 
     app.UseDeveloperExceptionPage();
 
-    app.UseOpenApi();
-    app.UseSwaggerUi();
-
-    app.MapGet("/", context =>
-    {
-       context.Response.Redirect("/swagger");
-       return Task.CompletedTask; 
-    });
+    app.UseSwagger();
+    app.UseSwaggerUI();
+    app.MapGet("/", () => Results.LocalRedirect("/swagger"));
 }
 else
 {
-    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
 }
 
 app.UseHttpsRedirection();
 app.UseRouting();
+
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapStaticAssets();
