@@ -1,23 +1,30 @@
+using UrlShortener.Api.Endpoints;
 using UrlShortener.Api.Application.Extensions;
 using UrlShortener.Api.Data;
 using UrlShortener.Api.Data.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
+// Add logger
 builder.Logging.ClearProviders();
-builder.Logging.AddSimpleConsole(c => c.SingleLine = true);
+builder.Logging.AddConsole();
+builder.Logging.SetMinimumLevel(LogLevel.Information);
 
+// Add authorization
 builder.Services.AddHttpContextAccessor();
 builder.Services.AddCookieAuthentication();
 builder.Services.AddAuthorization();
 
+// Add main services
 builder.Services.AddPostgresDbContext<UrlShortenerDbContext>();
 builder.Services.AddCQRSMediator();
 
+// Add api
+builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-builder.Services.AddControllersWithViews();
+builder.Services.AddProblemDetails();
 
+// Build app
 var app = builder.Build();
 
 if (app.Environment.IsDevelopment())
@@ -25,28 +32,19 @@ if (app.Environment.IsDevelopment())
     // Automatic DB migration
     app.Services.MigrateDatabase<UrlShortenerDbContext>();
 
-    app.UseDeveloperExceptionPage();
-
+    // Use swagger page
+    app.MapGet("/", () => Results.LocalRedirect("/swagger")).ExcludeFromDescription();
     app.UseSwagger();
     app.UseSwaggerUI();
-    app.MapGet("/", () => Results.LocalRedirect("/swagger"));
-}
-else
-{
-    app.UseHsts();
 }
 
 app.UseHttpsRedirection();
-app.UseRouting();
 
+// Use authorization
 app.UseAuthentication();
 app.UseAuthorization();
 
-app.MapStaticAssets();
-app.MapControllers();
-app.MapControllerRoute(
-    name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}")
-    .WithStaticAssets();
+// MapEndpoints
+app.MapUsersEndpoints();
 
 app.Run();
