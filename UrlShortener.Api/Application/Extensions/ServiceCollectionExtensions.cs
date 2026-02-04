@@ -6,22 +6,23 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 
 using UrlShortener.Api.Application.Interfaces;
 using UrlShortener.Api.Application.Services;
-using UrlShortener.Api.Data.Entities;
 
 namespace UrlShortener.Api.Application.Extensions;
 
 public static class ServiceCollectionExtensions
 {
-    public static IServiceCollection AddCQRSMediator(this IServiceCollection services)
+    public static IServiceCollection AddApiServices(this IServiceCollection services)
     {
-        services.AddScoped<IPasswordManager<UserEntity>, PasswordManager>();
+        services.AddScoped<IPasswordManager, PasswordManager>();
 
         var assembly = typeof(Program).Assembly;
-        return services.AddLiteBus(liteBus =>
+        services.AddLiteBus(liteBus =>
         {
             liteBus.AddCommandModule(module => module.RegisterFromAssembly(assembly));
             liteBus.AddQueryModule(module => module.RegisterFromAssembly(assembly));
         });
+
+        return services;
     }
 
     public static IServiceCollection AddCookieAuthentication(this IServiceCollection services)

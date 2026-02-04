@@ -1,7 +1,9 @@
+using UrlShortener.Api.Data.Entities;
+
 namespace UrlShortener.Api.Application.Interfaces;
 
-public interface IPasswordManager<TUser> where TUser : class
+public interface IPasswordManager
 {
-    Task<string> HashPassword(TUser user, string password);
-    Task<bool> VerifyPassword(TUser user, string password);
+    Task<string> HashPassword(UserEntity user, string password);
+    Task<bool> VerifyPassword(UserEntity user, string password);
 }

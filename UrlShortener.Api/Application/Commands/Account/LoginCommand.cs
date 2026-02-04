@@ -1,14 +1,11 @@
 using System.ComponentModel.DataAnnotations;
+using UrlShortener.Api.Application.Attributes;
 
 using LiteBus.Commands.Abstractions;
 
-using UrlShortener.Api.Application.DTOs;
-
 namespace UrlShortener.Api.Application.Commands.Account;
 
-public class LoginCommand : ICommand<ResultDTO>
-{
-    [EmailAddress]
-    public required string Email { get; set; }
-    public required string Password { get; set; }
-}
+public record LoginCommand(
+    [EmailValidation, Required, StringLength(255)] string Email,
+    [PasswordValidation, Required, StringLength(32, MinimumLength = 8)] string Password
+) : ICommand;

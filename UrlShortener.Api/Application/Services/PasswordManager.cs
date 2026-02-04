@@ -6,7 +6,7 @@ using UrlShortener.Api.Data.Entities;
 
 namespace UrlShortener.Api.Application.Services;
 
-public class PasswordManager(UrlShortenerDbContext context) : IPasswordManager<UserEntity>
+public class PasswordManager(UrlShortenerDbContext context) : IPasswordManager
 {
     private readonly PasswordHasher<UserEntity> _hasher = new();
 

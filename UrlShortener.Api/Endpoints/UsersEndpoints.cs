@@ -10,17 +10,17 @@ namespace UrlShortener.Api.Endpoints;
 
 public static class UsersEndpoints
 {
-    public static WebApplication MapUsersEndpoints(this WebApplication app)
+    public static IEndpointRouteBuilder MapUsersEndpoints(this IEndpointRouteBuilder app)
     {
         var group = app.MapGroup("/users").WithTags("Users");
         group.MapPost("/register", Register);
         group.MapPost("/login", Login);
-        group.MapPost("/logout", Logout);
+        group.MapPost("/logout", Logout).RequireAuthorization();
         group.MapGet("/", GetUsers);
         return app;
     }
 
-    private static async Task<IResult> Register(
+    public static async Task<IResult> Register(
         [FromBody] RegisterCommand command,
         [FromServices] ICommandMediator commandMediator)
     {
@@ -28,7 +28,7 @@ public static class UsersEndpoints
         return TypedResults.Created();
     }
 
-    private static async Task<IResult> Login(
+    public static async Task<IResult> Login(
         [FromBody] LoginCommand command,
         [FromServices] ICommandMediator commandMediator)
     {
@@ -36,13 +36,13 @@ public static class UsersEndpoints
         return TypedResults.NoContent();
     }
 
-    private static async Task<IResult> Logout([FromServices] ICommandMediator commandMediator)
+    public static async Task<IResult> Logout([FromServices] ICommandMediator commandMediator)
     {
         await commandMediator.SendAsync(new LogoutCommand());
         return TypedResults.NoContent();
     }
 
-    private static async Task<IResult> GetUsers([FromServices] UrlShortenerDbContext context)
+    public static async Task<IResult> GetUsers([FromServices] UrlShortenerDbContext context)
     {
         var users = await context.Users.ToListAsync();
         return TypedResults.Ok(users);

@@ -2,6 +2,7 @@ using UrlShortener.Api.Endpoints;
 using UrlShortener.Api.Application.Extensions;
 using UrlShortener.Api.Data;
 using UrlShortener.Api.Data.Extensions;
+using UrlShortener.Api.Exceptions.Handlers;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -17,11 +18,17 @@ builder.Services.AddAuthorization();
 
 // Add main services
 builder.Services.AddPostgresDbContext<UrlShortenerDbContext>();
-builder.Services.AddCQRSMediator();
+builder.Services.AddApiServices();
+
+// Add validation
+builder.Services.AddValidation();
+builder.Services.AddExceptionHandler<GlobalExceptionHandler>();
 
 // Add api
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+// Enable Problem Details
 builder.Services.AddProblemDetails();
 
 // Build app
@@ -39,12 +46,13 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+app.UseExceptionHandler();
 
 // Use authorization
 app.UseAuthentication();
 app.UseAuthorization();
 
 // MapEndpoints
-app.MapUsersEndpoints();
+app.MapEndpoints();
 
 app.Run();
