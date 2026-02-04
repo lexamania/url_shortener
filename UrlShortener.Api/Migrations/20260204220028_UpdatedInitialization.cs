@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
+﻿using System;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 #nullable disable
@@ -6,7 +7,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace UrlShortener.Api.Migrations
 {
     /// <inheritdoc />
-    public partial class Initial : Migration
+    public partial class UpdatedInitialization : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -15,14 +16,14 @@ namespace UrlShortener.Api.Migrations
                 name: "urls",
                 columns: table => new
                 {
-                    short_url = table.Column<string>(type: "character varying(16)", maxLength: 16, nullable: false),
+                    id = table.Column<string>(type: "character varying(16)", maxLength: 16, nullable: false),
                     url = table.Column<string>(type: "text", nullable: false),
                     title = table.Column<string>(type: "character varying(60)", maxLength: 60, nullable: true),
                     user_id = table.Column<int>(type: "integer", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("pk_urls", x => x.short_url);
+                    table.PrimaryKey("pk_urls", x => x.id);
                 });
 
             migrationBuilder.CreateTable(
@@ -32,13 +33,20 @@ namespace UrlShortener.Api.Migrations
                     id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     email = table.Column<string>(type: "character varying(255)", maxLength: 255, nullable: false),
-                    password = table.Column<string>(type: "character varying(255)", maxLength: 255, nullable: false),
-                    admin = table.Column<bool>(type: "boolean", nullable: false)
+                    hash_password = table.Column<string>(type: "text", nullable: false),
+                    admin = table.Column<bool>(type: "boolean", nullable: false),
+                    created_on = table.Column<DateTime>(type: "timestamp with time zone", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("pk_users", x => x.id);
                 });
+
+            migrationBuilder.CreateIndex(
+                name: "ix_users_email",
+                table: "users",
+                column: "email",
+                unique: true);
         }
 
         /// <inheritdoc />

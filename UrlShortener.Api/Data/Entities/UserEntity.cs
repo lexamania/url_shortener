@@ -19,8 +19,7 @@ public class UserEntity
     public required string HashPassword { get; set; }
 
     public bool Admin { get; set; }
-
     public required DateTime CreatedOn { get; set; }
 
-    [NotMapped] public List<ShortUrlEntity> ShortUrls{ get; } = [];
+    [NotMapped] public List<UrlEntity> ShortUrls{ get; } = [];
 }

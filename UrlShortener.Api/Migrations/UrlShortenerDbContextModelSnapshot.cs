@@ -22,12 +22,12 @@ namespace UrlShortener.Api.Migrations
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
-            modelBuilder.Entity("UrlShortener.Api.Data.Entities.ShortUrlEntity", b =>
+            modelBuilder.Entity("UrlShortener.Api.Data.Entities.UrlEntity", b =>
                 {
-                    b.Property<string>("ShortUrl")
+                    b.Property<string>("Id")
                         .HasMaxLength(16)
                         .HasColumnType("character varying(16)")
-                        .HasColumnName("short_url");
+                        .HasColumnName("id");
 
                     b.Property<string>("Title")
                         .HasMaxLength(60)
@@ -43,7 +43,7 @@ namespace UrlShortener.Api.Migrations
                         .HasColumnType("integer")
                         .HasColumnName("user_id");
 
-                    b.HasKey("ShortUrl")
+                    b.HasKey("Id")
                         .HasName("pk_urls");
 
                     b.ToTable("urls", (string)null);

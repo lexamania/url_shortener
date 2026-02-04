@@ -4,10 +4,10 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace UrlShortener.Api.Data.Entities;
 
 [Table("urls")]
-public class ShortUrlEntity
+public class UrlEntity
 {
     [Key, MaxLength(16)]
-    public required string ShortUrl { get; set; }
+    public required string Id { get; set; }
 
     [Column(TypeName = "text")]
     public required string Url { get; set; }

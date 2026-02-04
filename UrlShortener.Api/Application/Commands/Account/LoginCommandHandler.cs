@@ -32,6 +32,8 @@ public class LoginCommandHandler(
         if (!verificationResult)
             throw new ArgumentException("Wrong password");
 
+        // TODO: email verification
+
         var claims = new List<Claim>
         {
             new(ClaimTypes.NameIdentifier, user.Id.ToString()),
