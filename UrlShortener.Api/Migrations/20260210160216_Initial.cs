@@ -7,7 +7,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace UrlShortener.Api.Migrations
 {
     /// <inheritdoc />
-    public partial class UpdatedInitialization : Migration
+    public partial class Initial : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -16,8 +16,10 @@ namespace UrlShortener.Api.Migrations
                 name: "urls",
                 columns: table => new
                 {
-                    id = table.Column<string>(type: "character varying(16)", maxLength: 16, nullable: false),
+                    id = table.Column<long>(type: "bigint", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     url = table.Column<string>(type: "text", nullable: false),
+                    short_url = table.Column<string>(type: "character varying(32)", maxLength: 32, nullable: true),
                     title = table.Column<string>(type: "character varying(60)", maxLength: 60, nullable: true),
                     user_id = table.Column<int>(type: "integer", nullable: false)
                 },
@@ -41,6 +43,12 @@ namespace UrlShortener.Api.Migrations
                 {
                     table.PrimaryKey("pk_users", x => x.id);
                 });
+
+            migrationBuilder.CreateIndex(
+                name: "ix_urls_short_url",
+                table: "urls",
+                column: "short_url",
+                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "ix_users_email",

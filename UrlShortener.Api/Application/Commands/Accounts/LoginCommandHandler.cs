@@ -9,8 +9,9 @@ using Microsoft.EntityFrameworkCore;
 using UrlShortener.Api.Application.Interfaces;
 using UrlShortener.Api.Data;
 using UrlShortener.Api.Application.Utilities;
+using UrlShortener.Api.Exceptions;
 
-namespace UrlShortener.Api.Application.Commands.Account;
+namespace UrlShortener.Api.Application.Commands.Accounts;
 
 public class LoginCommandHandler(
     UrlShortenerDbContext context,
@@ -26,11 +27,11 @@ public class LoginCommandHandler(
         var email = CredentialsUtility.NormalizeEmail(message.Email);
 
         var user = await context.Users.SingleOrDefaultAsync(x => x.Email == email)
-            ?? throw new KeyNotFoundException("User not found");
+            ?? throw new StatusException("User not found", StatusCodes.Status404NotFound);
 
         var verificationResult = await passwordManager.VerifyPassword(user, password);
         if (!verificationResult)
-            throw new ArgumentException("Wrong password");
+            throw new StatusException("Wrong password", StatusCodes.Status400BadRequest);
 
         // TODO: email verification
 

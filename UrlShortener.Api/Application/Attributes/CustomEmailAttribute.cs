@@ -1,19 +1,19 @@
-using System.Buffers;
 using System.ComponentModel.DataAnnotations;
+using System.Net.Mail;
 
 namespace UrlShortener.Api.Application.Attributes;
 
 [AttributeUsage(AttributeTargets.Property | AttributeTargets.Field | AttributeTargets.Parameter, AllowMultiple = false)]
-public class PasswordValidationAttribute : ValidationAttribute
+public sealed class CustomEmailAttribute() : DataTypeAttribute(DataType.EmailAddress)
 {
-
     public override string FormatErrorMessage(string name)
-        => "Invalid password. Password should be without spaces";
+        => "Invalid email format";
 
     public override bool IsValid(object? value)
     {
-        var password = value?.ToString()!.Trim();
-        return password is { Length: >= 8 }
-            && !password.ContainsAny(SearchValues.Create(' '));
+        var email = value?.ToString()!.Trim();
+        return email is not null
+            && MailAddress.TryCreate(email, out var addr)
+            && addr.Address.Equals(email);
     }
 }

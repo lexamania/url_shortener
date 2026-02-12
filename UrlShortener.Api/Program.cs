@@ -19,6 +19,7 @@ builder.Services.AddAuthorization();
 // Add main services
 builder.Services.AddPostgresDbContext<UrlShortenerDbContext>();
 builder.Services.AddApiServices();
+builder.Services.AddMemoryCache();
 
 // Add validation
 builder.Services.AddValidation();
@@ -53,6 +54,7 @@ app.UseAuthentication();
 app.UseAuthorization();
 
 // MapEndpoints
-app.MapEndpoints();
+app.MapApiEndpoints();
+app.MapRedirectEndpoints();
 
 app.Run();

@@ -9,9 +9,14 @@ public class GlobalExceptionHandler : IExceptionHandler
     {
         ProblemDetails problem = exception switch
         {
+            StatusException ex => new()
+            {
+                Title = "Request error",
+                Status = ex.StatusCode,
+            },
             ArgumentException => new ()
             {
-                Title = "'Argument' error",
+                Title = "Request error",
                 Status = StatusCodes.Status400BadRequest,
             },
             KeyNotFoundException => new ()

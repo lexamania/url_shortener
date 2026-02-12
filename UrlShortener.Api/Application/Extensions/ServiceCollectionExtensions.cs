@@ -14,6 +14,7 @@ public static class ServiceCollectionExtensions
     public static IServiceCollection AddApiServices(this IServiceCollection services)
     {
         services.AddScoped<IPasswordManager, PasswordManager>();
+        services.AddScoped<IUserService, UserService>();
 
         var assembly = typeof(Program).Assembly;
         services.AddLiteBus(liteBus =>

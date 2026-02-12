@@ -6,8 +6,9 @@ using UrlShortener.Api.Application.Interfaces;
 using UrlShortener.Api.Data;
 using UrlShortener.Api.Data.Entities;
 using UrlShortener.Api.Application.Utilities;
+using UrlShortener.Api.Exceptions;
 
-namespace UrlShortener.Api.Application.Commands.Account;
+namespace UrlShortener.Api.Application.Commands.Accounts;
 
 public class RegisterCommandHandler(
     UrlShortenerDbContext context,
@@ -21,7 +22,7 @@ public class RegisterCommandHandler(
 
         var user = await context.Users.SingleOrDefaultAsync(x => x.Email == email);
         if (user is not null)
-            throw new ArgumentException("User already exist");
+            throw new StatusException("User already exists", StatusCodes.Status400BadRequest);
 
         user = new UserEntity()
         {

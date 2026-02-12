@@ -12,8 +12,8 @@ using UrlShortener.Api.Data;
 namespace UrlShortener.Api.Migrations
 {
     [DbContext(typeof(UrlShortenerDbContext))]
-    [Migration("20260204220028_UpdatedInitialization")]
-    partial class UpdatedInitialization
+    [Migration("20260210160216_Initial")]
+    partial class Initial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -27,10 +27,17 @@ namespace UrlShortener.Api.Migrations
 
             modelBuilder.Entity("UrlShortener.Api.Data.Entities.UrlEntity", b =>
                 {
-                    b.Property<string>("Id")
-                        .HasMaxLength(16)
-                        .HasColumnType("character varying(16)")
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint")
                         .HasColumnName("id");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("Id"));
+
+                    b.Property<string>("ShortUrl")
+                        .HasMaxLength(32)
+                        .HasColumnType("character varying(32)")
+                        .HasColumnName("short_url");
 
                     b.Property<string>("Title")
                         .HasMaxLength(60)
@@ -48,6 +55,10 @@ namespace UrlShortener.Api.Migrations
 
                     b.HasKey("Id")
                         .HasName("pk_urls");
+
+                    b.HasIndex("ShortUrl")
+                        .IsUnique()
+                        .HasDatabaseName("ix_urls_short_url");
 
                     b.ToTable("urls", (string)null);
                 });

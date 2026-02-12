@@ -8,4 +8,20 @@ public class UrlShortenerDbContext(DbContextOptions<UrlShortenerDbContext> optio
 {
     public DbSet<UserEntity> Users { get; set; }
     public DbSet<UrlEntity> Urls { get; set; }
+
+    public async Task UseTransactionAsync(Func<Task> action)
+    {
+        using var transaction = await Database.BeginTransactionAsync();
+
+        try
+        {
+            await action();
+            await transaction.CommitAsync();
+        }
+        catch
+        {
+            await transaction.RollbackAsync();
+            throw;
+        }
+    }
 }

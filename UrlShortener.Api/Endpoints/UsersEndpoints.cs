@@ -3,7 +3,7 @@ using LiteBus.Commands.Abstractions;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
-using UrlShortener.Api.Application.Commands.Account;
+using UrlShortener.Api.Application.Commands.Accounts;
 using UrlShortener.Api.Data;
 
 namespace UrlShortener.Api.Endpoints;

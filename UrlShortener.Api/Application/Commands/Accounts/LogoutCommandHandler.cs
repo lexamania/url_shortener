@@ -3,7 +3,7 @@ using LiteBus.Commands.Abstractions;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 
-namespace UrlShortener.Api.Application.Commands.Account;
+namespace UrlShortener.Api.Application.Commands.Accounts;
 
 public class LogoutCommandHandler(
     IHttpContextAccessor httpContextAccessor
