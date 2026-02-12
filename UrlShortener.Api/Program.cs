@@ -2,7 +2,7 @@ using UrlShortener.Api.Endpoints;
 using UrlShortener.Api.Application.Extensions;
 using UrlShortener.Api.Data;
 using UrlShortener.Api.Data.Extensions;
-using UrlShortener.Api.Exceptions.Handlers;
+using UrlShortener.Api.Domain.Exceptions.Handlers;
 
 var builder = WebApplication.CreateBuilder(args);
 

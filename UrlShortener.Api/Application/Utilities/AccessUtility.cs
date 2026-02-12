@@ -1,4 +1,4 @@
-using UrlShortener.Api.Application.Interfaces;
+using UrlShortener.Api.Domain.Interfaces;
 
 namespace UrlShortener.Api.Application.Utilities;
 

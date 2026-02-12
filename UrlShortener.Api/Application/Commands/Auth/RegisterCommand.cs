@@ -2,7 +2,7 @@ using System.ComponentModel.DataAnnotations;
 
 using LiteBus.Commands.Abstractions;
 
-using UrlShortener.Api.Application.Attributes;
+using UrlShortener.Api.Domain.Attributes;
 
 namespace UrlShortener.Api.Application.Commands.Auth;
 

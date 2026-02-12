@@ -1,4 +1,4 @@
-namespace UrlShortener.Api.Application.Interfaces;
+namespace UrlShortener.Api.Domain.Interfaces;
 
 public interface IUserService
 {

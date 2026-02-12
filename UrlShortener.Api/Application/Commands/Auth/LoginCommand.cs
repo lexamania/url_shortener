@@ -1,5 +1,5 @@
 using System.ComponentModel.DataAnnotations;
-using UrlShortener.Api.Application.Attributes;
+using UrlShortener.Api.Domain.Attributes;
 
 using LiteBus.Commands.Abstractions;
 

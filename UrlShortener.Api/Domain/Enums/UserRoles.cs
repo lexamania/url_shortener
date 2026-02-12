@@ -1,4 +1,4 @@
-namespace UrlShortener.Api.Enums;
+namespace UrlShortener.Api.Domain.Enums;
 
 public static class UserRoles
 {

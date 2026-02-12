@@ -4,8 +4,8 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Caching.Memory;
 
 using UrlShortener.Api.Application.Converters;
-using UrlShortener.Api.Application.DTOs;
-using UrlShortener.Api.Application.Models;
+using UrlShortener.Api.Domain.DTOs;
+using UrlShortener.Api.Domain.Models;
 using UrlShortener.Api.Application.Utilities;
 using UrlShortener.Api.Data;
 

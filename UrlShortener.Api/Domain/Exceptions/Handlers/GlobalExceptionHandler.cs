@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 
-namespace UrlShortener.Api.Exceptions.Handlers;
+namespace UrlShortener.Api.Domain.Exceptions.Handlers;
 
 public class GlobalExceptionHandler : IExceptionHandler
 {

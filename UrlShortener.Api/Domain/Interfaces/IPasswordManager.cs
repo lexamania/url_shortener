@@ -1,6 +1,6 @@
 using UrlShortener.Api.Data.Entities;
 
-namespace UrlShortener.Api.Application.Interfaces;
+namespace UrlShortener.Api.Domain.Interfaces;
 
 public interface IPasswordManager
 {

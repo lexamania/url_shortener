@@ -1,6 +1,6 @@
 using LiteBus.Commands.Abstractions;
 
-using UrlShortener.Api.Application.DTOs;
+using UrlShortener.Api.Domain.DTOs;
 
 namespace UrlShortener.Api.Application.Commands.Urls;
 

@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Identity;
 
-using UrlShortener.Api.Application.Interfaces;
+using UrlShortener.Api.Domain.Interfaces;
 using UrlShortener.Api.Data;
 using UrlShortener.Api.Data.Entities;
 

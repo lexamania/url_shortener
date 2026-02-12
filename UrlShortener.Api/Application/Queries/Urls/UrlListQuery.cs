@@ -1,8 +1,8 @@
 using LiteBus.Queries.Abstractions;
 
-using UrlShortener.Api.Application.DTOs;
-using UrlShortener.Api.Application.Interfaces;
-using UrlShortener.Api.Application.Models;
+using UrlShortener.Api.Domain.DTOs;
+using UrlShortener.Api.Domain.Interfaces;
+using UrlShortener.Api.Domain.Models;
 
 namespace UrlShortener.Api.Application.Queries.Urls;
 

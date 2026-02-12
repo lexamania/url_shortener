@@ -1,6 +1,6 @@
 using UrlShortener.Api.Application.Utilities;
 
-namespace UrlShortener.Api.Application.Models;
+namespace UrlShortener.Api.Domain.Models;
 
 public record PageModel(int PageNumber, int PageCount)
 {

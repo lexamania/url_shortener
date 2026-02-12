@@ -2,10 +2,10 @@ using LiteBus.Commands.Abstractions;
 
 using Microsoft.EntityFrameworkCore;
 
-using UrlShortener.Api.Application.Interfaces;
+using UrlShortener.Api.Domain.Interfaces;
 using UrlShortener.Api.Application.Utilities;
 using UrlShortener.Api.Data;
-using UrlShortener.Api.Exceptions;
+using UrlShortener.Api.Domain.Exceptions;
 
 namespace UrlShortener.Api.Application.Commands.Urls;
 

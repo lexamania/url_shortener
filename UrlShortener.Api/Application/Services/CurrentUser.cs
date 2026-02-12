@@ -1,8 +1,8 @@
 using System.ComponentModel;
 using System.Security.Claims;
 
-using UrlShortener.Api.Application.Interfaces;
-using UrlShortener.Api.Enums;
+using UrlShortener.Api.Domain.Interfaces;
+using UrlShortener.Api.Domain.Enums;
 
 namespace UrlShortener.Api.Application.Services;
 

@@ -1,6 +1,6 @@
 using UrlShortener.Api.Application.Converters.Base;
-using UrlShortener.Api.Application.DTOs;
-using UrlShortener.Api.Application.Interfaces;
+using UrlShortener.Api.Domain.DTOs;
+using UrlShortener.Api.Domain.Interfaces;
 using UrlShortener.Api.Application.Utilities;
 using UrlShortener.Api.Data.Entities;
 

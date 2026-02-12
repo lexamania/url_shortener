@@ -1,7 +1,7 @@
 using System.Buffers;
 using System.ComponentModel.DataAnnotations;
 
-namespace UrlShortener.Api.Application.Attributes;
+namespace UrlShortener.Api.Domain.Attributes;
 
 [AttributeUsage(AttributeTargets.Property | AttributeTargets.Field | AttributeTargets.Parameter, AllowMultiple = false)]
 public sealed class CustomPasswordAttribute() : DataTypeAttribute(DataType.Password)

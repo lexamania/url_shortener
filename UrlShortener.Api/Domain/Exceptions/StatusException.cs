@@ -1,4 +1,4 @@
-namespace UrlShortener.Api.Exceptions;
+namespace UrlShortener.Api.Domain.Exceptions;
 
 public class StatusException: Exception
 {

@@ -6,11 +6,11 @@ using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.EntityFrameworkCore;
 
-using UrlShortener.Api.Application.Interfaces;
+using UrlShortener.Api.Domain.Interfaces;
 using UrlShortener.Api.Data;
 using UrlShortener.Api.Application.Utilities;
-using UrlShortener.Api.Exceptions;
-using UrlShortener.Api.Enums;
+using UrlShortener.Api.Domain.Exceptions;
+using UrlShortener.Api.Domain.Enums;
 
 namespace UrlShortener.Api.Application.Commands.Auth;
 

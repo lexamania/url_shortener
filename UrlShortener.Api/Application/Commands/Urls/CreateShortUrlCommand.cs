@@ -4,8 +4,8 @@ using LiteBus.Commands.Abstractions;
 
 using Newtonsoft.Json;
 
-using UrlShortener.Api.Application.Attributes;
-using UrlShortener.Api.Application.DTOs;
+using UrlShortener.Api.Domain.Attributes;
+using UrlShortener.Api.Domain.DTOs;
 
 namespace UrlShortener.Api.Application.Commands.Urls;
 

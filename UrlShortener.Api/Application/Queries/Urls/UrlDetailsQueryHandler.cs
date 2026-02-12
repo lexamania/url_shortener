@@ -3,9 +3,9 @@ using LiteBus.Queries.Abstractions;
 using Microsoft.EntityFrameworkCore;
 
 using UrlShortener.Api.Application.Converters;
-using UrlShortener.Api.Application.DTOs;
+using UrlShortener.Api.Domain.DTOs;
 using UrlShortener.Api.Data;
-using UrlShortener.Api.Exceptions;
+using UrlShortener.Api.Domain.Exceptions;
 
 namespace UrlShortener.Api.Application.Queries.Urls;
 

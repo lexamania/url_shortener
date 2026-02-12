@@ -5,7 +5,7 @@ using LiteBus.Queries.Extensions.MicrosoftDependencyInjection;
 using Microsoft.AspNetCore.Authentication.Cookies;
 
 using UrlShortener.Api.Application.Converters;
-using UrlShortener.Api.Application.Interfaces;
+using UrlShortener.Api.Domain.Interfaces;
 using UrlShortener.Api.Application.Services;
 
 namespace UrlShortener.Api.Application.Extensions;
