@@ -8,7 +8,7 @@ using UrlShortener.Api.Data.Entities;
 using UrlShortener.Api.Application.Utilities;
 using UrlShortener.Api.Exceptions;
 
-namespace UrlShortener.Api.Application.Commands.Accounts;
+namespace UrlShortener.Api.Application.Commands.Auth;
 
 public class RegisterCommandHandler(
     UrlShortenerDbContext context,

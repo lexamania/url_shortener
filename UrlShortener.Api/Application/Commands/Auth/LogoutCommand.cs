@@ -1,5 +1,5 @@
 using LiteBus.Commands.Abstractions;
 
-namespace UrlShortener.Api.Application.Commands.Accounts;
+namespace UrlShortener.Api.Application.Commands.Auth;
 
 public record LogoutCommand() : ICommand;

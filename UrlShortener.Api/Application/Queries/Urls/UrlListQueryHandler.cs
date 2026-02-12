@@ -13,7 +13,8 @@ namespace UrlShortener.Api.Application.Queries.Urls;
 
 public class UrlListQueryHandler(
     UrlShortenerDbContext dbContext,
-    IMemoryCache cache
+    IMemoryCache cache,
+    UrlConverter urlConverter
     ) : IQueryHandler<UrlListQuery, ListResultModel<ShortUrlDto>>
 {
     private const string TotalUrlsCacheKey = "total_urls";
@@ -31,7 +32,7 @@ public class UrlListQueryHandler(
             .Skip(skip).Take(count)
             .AsNoTracking()
             .ToListAsync();
-        var urlDtoList = ListConverter.ToListDto(urls, UrlConverter.ToShortDto);
+        var urlDtoList = urlConverter.ToList(urls, urlConverter.ToShortDto);
 
         return new(urlDtoList, pagging);
     }

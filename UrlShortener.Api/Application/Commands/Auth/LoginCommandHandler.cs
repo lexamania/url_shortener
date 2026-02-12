@@ -10,8 +10,9 @@ using UrlShortener.Api.Application.Interfaces;
 using UrlShortener.Api.Data;
 using UrlShortener.Api.Application.Utilities;
 using UrlShortener.Api.Exceptions;
+using UrlShortener.Api.Enums;
 
-namespace UrlShortener.Api.Application.Commands.Accounts;
+namespace UrlShortener.Api.Application.Commands.Auth;
 
 public class LoginCommandHandler(
     UrlShortenerDbContext context,
@@ -39,7 +40,7 @@ public class LoginCommandHandler(
         {
             new(ClaimTypes.NameIdentifier, user.Id.ToString()),
             new(ClaimTypes.Email, user.Email),
-            new(ClaimTypes.Role, user.Admin ? "Admin" : "User")
+            new(ClaimTypes.Role, user.Admin ?  UserRoles.AdminRole : UserRoles.UserRole)
         };
 
         var identity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);

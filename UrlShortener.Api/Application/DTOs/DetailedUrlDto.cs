@@ -4,5 +4,8 @@ public record DetailedUrlDto(
     long Id,
     string Url,
     string ShortUrl,
-    string? Title
-);
+    string? Title)
+{
+    public bool IsCreator { get; set; }
+    public bool CanModify { get; set; }
+};

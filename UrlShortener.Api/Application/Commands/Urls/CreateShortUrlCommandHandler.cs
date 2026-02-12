@@ -14,7 +14,8 @@ namespace UrlShortener.Api.Application.Commands.Urls;
 
 public class CreateShortUrlCommandHandler(
     UrlShortenerDbContext dbContext,
-    IUserService userService
+    IUserService userService,
+    UrlConverter urlConverter
     ): ICommandHandler<CreateShortUrlCommand, ShortUrlDto>
 {
     public async Task<ShortUrlDto> HandleAsync(CreateShortUrlCommand message, CancellationToken cancellationToken = default)
@@ -40,7 +41,7 @@ public class CreateShortUrlCommandHandler(
             await dbContext.SaveChangesAsync();
         });
 
-        var urlDto = UrlConverter.ToShortDto(url);
+        var urlDto = urlConverter.ToShortDto(url);
         return urlDto;
     }
 }
