@@ -1,0 +1,94 @@
+<div class="urls-container">
+  <div class="create-form">
+    <input type="text" [(ngModel)]="newUrl.url" placeholder="URL" />
+    <input type="text" [(ngModel)]="newUrl.shortUrl" placeholder="Short URL (optional)" />
+    <input type="text" [(ngModel)]="newUrl.title" placeholder="Title (optional)" />
+    <button class="btn btn-primary" (click)="createUrl()">Create</button>
+    @if (errorMsg()){
+    <div class="error-label">{{ errorMsg() }}</div>
+    }
+  </div>
+
+  <div class="table-toolbar">
+    <h2 class="table-title">Your URLs</h2>
+    @if (selectedIds().size > 0) {
+    <button class="btn btn-danger" (click)="deleteSelected()">
+      Delete Selected ({{ selectedIds().size }})
+    </button>
+    }
+  </div>
+
+  <div class="table-wrapper">
+    <table class="urls-table">
+      <thead>
+        <tr>
+          <th class="checkbox-col"></th>
+          <th class="url-col">URL</th>
+          <th class="short-url-col">Short URL</th>
+          <th class="owner-col">Owner</th>
+          <th class="action-col">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        @if (urls().length === 0 && !isLoading()) {
+        <tr class="empty-row">
+          <td colspan="5" class="empty-message">No URLs found. Create one to get started!</td>
+        </tr>
+        }
+        @else {
+        @for (url of urls(); track $index) {
+        <tr class="table-row">
+          <td class="checkbox-col">
+            @if (url.canModify) {
+            <input type="checkbox" [checked]="isSelected(url.id)" (change)="toggleSelection(url.id)"
+              class="row-checkbox" />
+            }
+          </td>
+          <td class="url-col">
+            <a [href]="url.url" target="_blank" rel="noopener" class="url-link">
+              {{ url.url }}
+            </a>
+          </td>
+          <td class="short-url-col">
+            <div class="short-url-display">
+              <code>{{ url.shortUrl }}</code>
+              <button class="copy-btn" (click)="copyToClipboard(url.shortUrl)" title="Copy to clipboard">
+                📋
+              </button>
+            </div>
+          </td>
+          <td class="owner-col">
+            <span class="badge" [class.owner]="url.isOwner">
+              {{ url.isOwner ? 'Owner' : 'Viewer' }}
+            </span>
+          </td>
+          <td class="action-col">
+            <div class="actions">
+              <a [href]="'/urls/' + url.id" class="btn btn-secondary btn-sm">
+                View
+              </a>
+              @if (url.canModify) {
+              <button class="btn btn-danger btn-sm" (click)="deleteUrl(url.id)">
+                Delete
+              </button>
+              }
+            </div>
+          </td>
+        </tr>
+        }
+        }
+      </tbody>
+    </table>
+  </div>
+
+  <div class="pagination">
+    @if (hasMorePages()) {
+    <button [disabled]="isLoading()" (click)="loadMore()" class="btn btn-primary">
+      {{ isLoading() ? 'Loading...' : 'Load More' }}
+    </button>
+    }
+    <span class="pagination-info">
+      Showing {{ urls().length }} of {{ totalPages() * pageSize() }} URLs
+    </span>
+  </div>
+</div>

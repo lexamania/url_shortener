@@ -1,0 +1,13 @@
+bin
+obj
+.git
+.gitignore
+.vs
+.vscode
+*.sln
+README.md
+*.md
+.DS_Store
+node_modules
+dist
+UrlShortener.Client/

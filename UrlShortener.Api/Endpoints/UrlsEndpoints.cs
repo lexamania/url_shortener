@@ -23,10 +23,10 @@ public static class EntityEndpoints
 
     public static async Task<IResult> GetUrls(
         [FromQuery] int page,
-        [FromQuery] int count,
+        [FromQuery] int size,
         [FromServices] IQueryMediator mediator)
     {
-        var query = new UrlListQuery(new(page, count));
+        var query = new UrlListQuery(new(page, size));
         var result = await mediator.QueryAsync(query);
         return result.Values.Count == 0
             ? TypedResults.NoContent()

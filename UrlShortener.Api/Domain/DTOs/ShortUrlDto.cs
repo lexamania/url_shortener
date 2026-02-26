@@ -5,6 +5,6 @@ public record ShortUrlDto(
     string Url,
     string ShortUrl)
 {
-    public bool IsCreator { get; set; }
+    public bool IsOwner { get; set; }
     public bool CanModify { get; set; }
 };

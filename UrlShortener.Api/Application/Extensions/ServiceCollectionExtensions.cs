@@ -21,6 +21,7 @@ public static class ServiceCollectionExtensions
                options.LogoutPath = "/api/v1/auth/logout";
                options.ExpireTimeSpan = TimeSpan.FromDays(7);
                options.SlidingExpiration = true;
+               options.Cookie.HttpOnly = true;
                options.Cookie.SecurePolicy = CookieSecurePolicy.Always;
             });
         return services;
@@ -28,6 +29,7 @@ public static class ServiceCollectionExtensions
 
     public static IServiceCollection AddApiServices(this IServiceCollection services)
     {
+        services.AddSingleton<AppConfig>();
         services.AddScoped<IPasswordManager, PasswordManager>();
         services.AddScoped<IUserService, CurrentUser>();
         services.AddConverters();

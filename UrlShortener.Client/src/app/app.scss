@@ -1,0 +1,129 @@
+:host {
+  --primary-color: #003366; /* Navy */
+  --primary-hover: #002244;
+  --danger-color: #dc2626;
+  --danger-hover: #b91c1c;
+
+  /* Light theme */
+  --light-bg: #ffffff;
+  --light-text-primary: #1f2937;
+  --light-text-secondary: #6b7280;
+  --light-border: #e5e7eb;
+  --light-border-light: #f3f4f6;
+  --light-card-bg: #ffffff;
+  --light-header-bg: #f9fafb;
+  --light-table-header-bg: #f3f4f6;
+  --light-table-hover-bg: #f9fafb;
+  --light-hover-bg: #f3f4f6;
+  --light-button-bg: #ffffff;
+  --light-button-hover-bg: #f3f4f6;
+  --light-dropdown-bg: #ffffff;
+  --light-code-bg: #f3f4f6;
+  --light-code-text: #003366;
+  --light-input-bg: #ffffff;
+  --light-input-focus-bg: #f9fafb;
+  --light-badge-bg: #f0f9ff;
+  --light-badge-text: #003366;
+  --light-badge-owner-bg: #ccf0ff;
+  --light-badge-owner-text: #003366;
+  --light-footer-bg: #f9fafb;
+  --light-scrollbar-track: #f3f4f6;
+  --light-scrollbar-thumb: #d1d5db;
+  --light-scrollbar-thumb-hover: #9ca3af;
+
+  /* Dark theme */
+  --dark-bg: #0f172a;
+  --dark-text-primary: #f1f5f9;
+  --dark-text-secondary: #cbd5e1;
+  --dark-border: #1e293b;
+  --dark-border-light: #334155;
+  --dark-card-bg: #1e293b;
+  --dark-header-bg: #0f172a;
+  --dark-table-header-bg: #1e293b;
+  --dark-table-hover-bg: #1e293b;
+  --dark-hover-bg: #334155;
+  --dark-button-bg: #1e293b;
+  --dark-button-hover-bg: #334155;
+  --dark-dropdown-bg: #1e293b;
+  --dark-code-bg: #334155;
+  --dark-code-text: #f1f5f9;
+  --dark-input-bg: #1e293b;
+  --dark-input-focus-bg: #334155;
+  --dark-badge-bg: #1e3a4c;
+  --dark-badge-text: #7dd3fc;
+  --dark-badge-owner-bg: #164e63;
+  --dark-badge-owner-text: #7dd3fc;
+  --dark-footer-bg: #0f172a;
+  --dark-scrollbar-track: #1e293b;
+  --dark-scrollbar-thumb: #334155;
+  --dark-scrollbar-thumb-hover: #475569;
+
+  /* Apply light theme by default */
+  --bg: var(--light-bg);
+  --text-primary: var(--light-text-primary);
+  --text-secondary: var(--light-text-secondary);
+  --border-color: var(--light-border);
+  --border-light: var(--light-border-light);
+  --card-bg: var(--light-card-bg);
+  --header-bg: var(--light-header-bg);
+  --table-header-bg: var(--light-table-header-bg);
+  --table-hover-bg: var(--light-table-hover-bg);
+  --hover-bg: var(--light-hover-bg);
+  --button-bg: var(--light-button-bg);
+  --button-hover-bg: var(--light-button-hover-bg);
+  --dropdown-bg: var(--light-dropdown-bg);
+  --code-bg: var(--light-code-bg);
+  --code-text: var(--light-code-text);
+  --input-bg: var(--light-input-bg);
+  --input-focus-bg: var(--light-input-focus-bg);
+  --badge-bg: var(--light-badge-bg);
+  --badge-text: var(--light-badge-text);
+  --badge-owner-bg: var(--light-badge-owner-bg);
+  --badge-owner-text: var(--light-badge-owner-text);
+  --footer-bg: var(--light-footer-bg);
+  --scrollbar-track: var(--light-scrollbar-track);
+  --scrollbar-thumb: var(--light-scrollbar-thumb);
+  --scrollbar-thumb-hover: var(--light-scrollbar-thumb-hover);
+
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  width: 100%;
+  background-color: var(--bg);
+  color: var(--text-primary);
+}
+
+:host[data-theme="dark"] {
+  --bg: var(--dark-bg);
+  --text-primary: var(--dark-text-primary);
+  --text-secondary: var(--dark-text-secondary);
+  --border-color: var(--dark-border);
+  --border-light: var(--dark-border-light);
+  --card-bg: var(--dark-card-bg);
+  --header-bg: var(--dark-header-bg);
+  --table-header-bg: var(--dark-table-header-bg);
+  --table-hover-bg: var(--dark-table-hover-bg);
+  --hover-bg: var(--dark-hover-bg);
+  --button-bg: var(--dark-button-bg);
+  --button-hover-bg: var(--dark-button-hover-bg);
+  --dropdown-bg: var(--dark-dropdown-bg);
+  --code-bg: var(--dark-code-bg);
+  --code-text: var(--dark-code-text);
+  --input-bg: var(--dark-input-bg);
+  --input-focus-bg: var(--dark-input-focus-bg);
+  --badge-bg: var(--dark-badge-bg);
+  --badge-text: var(--dark-badge-text);
+  --badge-owner-bg: var(--dark-badge-owner-bg);
+  --badge-owner-text: var(--dark-badge-owner-text);
+  --footer-bg: var(--dark-footer-bg);
+  --scrollbar-track: var(--dark-scrollbar-track);
+  --scrollbar-thumb: var(--dark-scrollbar-thumb);
+  --scrollbar-thumb-hover: var(--dark-scrollbar-thumb-hover);
+}
+
+.app-main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--bg);
+}

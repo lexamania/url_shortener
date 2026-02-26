@@ -1,0 +1,40 @@
+<div class="auth-container">
+  <div class="auth-card">
+    <h2 class="auth-title">
+      {{ isLogin() ? 'Login' : 'Register' }}
+    </h2>
+
+    <form (ngSubmit)="submit()" class="auth-form">
+      <div class="form-group">
+        <label for="email" class="form-label">Email</label>
+        <input id="email" type="email" [(ngModel)]="email" name="email" class="form-input" placeholder="your@email.com"
+          required />
+      </div>
+
+      <div class="form-group">
+        <label for="password" class="form-label">Password</label>
+        <input id="password" type="password" [(ngModel)]="password" name="password" class="form-input"
+          placeholder="••••••••" required />
+      </div>
+
+      @if (errorMessage()) {
+      <div class="error-message">
+        {{ errorMessage() }}
+      </div>
+      }
+
+      <button type="submit" [disabled]="isLoading()" class="btn btn-primary btn-submit">
+        {{ isLoading() ? 'Loading...' : (isLogin() ? 'Login' : 'Register') }}
+      </button>
+    </form>
+
+    <div class="auth-toggle">
+      <span class="toggle-text">
+        {{ isLogin() ? "Don't have an account?" : 'Already have an account?' }}
+      </span>
+      <button (click)="toggleMode()" class="toggle-btn">
+        {{ isLogin() ? 'Register' : 'Login' }}
+      </button>
+    </div>
+  </div>
+</div>

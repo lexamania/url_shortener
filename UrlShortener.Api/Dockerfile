@@ -1,0 +1,32 @@
+# Build stage
+FROM mcr.microsoft.com/dotnet/sdk:10.0 AS build
+
+WORKDIR /src
+
+# Copy source code
+COPY . .
+
+# Restore dependencies
+RUN dotnet restore "UrlShortener.Api/UrlShortener.Api.csproj"
+
+# Build the application
+RUN dotnet build "UrlShortener.Api/UrlShortener.Api.csproj" -c Release -o /app/build
+
+# Publish stage
+FROM build AS publish
+RUN dotnet publish "UrlShortener.Api/UrlShortener.Api.csproj" -c Release -o /app/publish /p:UseAppHost=false
+
+# Runtime stage
+FROM mcr.microsoft.com/dotnet/aspnet:10.0
+
+WORKDIR /app
+COPY --from=publish /app/publish .
+
+# Expose API port
+EXPOSE 5000
+
+# Set environment
+ENV ASPNETCORE_URLS=http://+:5000
+ENV ASPNETCORE_ENVIRONMENT=Production
+
+ENTRYPOINT ["dotnet", "UrlShortener.Api.dll"]

@@ -1,9 +1,62 @@
+version: '3.8'
+
 services:
   postgres:
-    image: postgres
+    image: postgres:16-alpine
+    container_name: url-shortener-db
     environment:
       POSTGRES_DB: url_shortener
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
     ports:
       - 5432:5432
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - url-shortener-network
+
+  api:
+    build:
+      context: .
+      dockerfile: UrlShortener.Api/Dockerfile.Development
+    container_name: url-shortener-api
+    ports:
+      - 5000:5000
+    environment:
+      ConnectionStrings__Postgres: "Host=postgres;Port=5432;Database=url_shortener;Username=postgres;Password=postgres"
+      ASPNETCORE_ENVIRONMENT: Development
+      DomainUrl: "http://+:5000"
+      ASPNETCORE_URLS: http://+:5000
+    depends_on:
+      postgres:
+        condition: service_healthy
+    networks:
+      - url-shortener-network
+    restart: unless-stopped
+
+  client:
+    build:
+      context: ./UrlShortener.Client
+      dockerfile: Dockerfile
+    container_name: url-shortener-client
+    ports:
+      - 4200:4200
+    environment:
+      API_URL: http://api:5000/api/v1
+    depends_on:
+      - api
+    networks:
+      - url-shortener-network
+    restart: unless-stopped
+
+volumes:
+  postgres_data:
+
+networks:
+  url-shortener-network:
+    driver: bridge

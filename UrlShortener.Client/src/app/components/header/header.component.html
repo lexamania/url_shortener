@@ -1,0 +1,39 @@
+<header class="app-header">
+  <div class="header-left">
+    <h1 class="logo" (click)="goHome()" style="cursor: pointer;">URL Shortener</h1>
+  </div>
+
+  <div class="header-right">
+    <button class="theme-toggle" (click)="toggleTheme()"
+      [attr.aria-label]="'Switch to ' + (currentTheme() === 'light' ? 'dark' : 'light') + ' theme'">
+      {{ currentTheme() === 'light' ? '🌙' : '☀️' }}
+    </button>
+
+    <div class="user-section">
+      @if (user$ | async; as user) {
+      <div class="user-info">
+        <span class="user-email">{{ user.email }}</span>
+      </div>
+      }
+
+      <div class="auth-dropdown-wrapper">
+        <button class="user-icon-btn" (click)="toggleAuthDropdown()">
+          👤
+        </button>
+
+        <div class="dropdown-menu" [class.open]="isAuthDropdownOpen()">
+          @if (user$ | async; as user) {
+          <div class="dropdown-content">
+            <button (click)="logout()" class="dropdown-item logout-btn">Logout</button>
+          </div>
+          } @else {
+          <div class="dropdown-content">
+            <a href="/login" class="dropdown-item">Login</a>
+            <a href="/register" class="dropdown-item">Register</a>
+          </div>
+          }
+        </div>
+      </div>
+    </div>
+  </div>
+</header>

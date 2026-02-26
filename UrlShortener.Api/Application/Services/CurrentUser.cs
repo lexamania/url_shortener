@@ -10,6 +10,7 @@ public class CurrentUser : IUserService
 {
     public int? UserId { get; }
     public bool IsAdmin { get; }
+    public string? Email { get; }
 
     public CurrentUser(IHttpContextAccessor httpContextAccessor)
     {
@@ -18,6 +19,7 @@ public class CurrentUser : IUserService
 
         UserId = GetClaim<int>(user, ClaimTypes.NameIdentifier);
         IsAdmin = GetClaim<string>(user, ClaimTypes.Role)?.Equals(UserRoles.AdminRole) ?? false;
+        Email = GetClaim<string>(user, ClaimTypes.Email);
     }
 
     private T? GetClaim<T>(ClaimsPrincipal user, string claim)

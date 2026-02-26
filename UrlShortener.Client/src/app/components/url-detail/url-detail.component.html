@@ -1,0 +1,90 @@
+<div class="url-detail-container">
+  <a href="/" class="back-link">&larr; Back to URLs</a>
+
+  @if (isLoading()) {
+  <div class="loading">
+    <p>Loading URL details...</p>
+  </div>
+  } @else {
+
+  @if (!urlData()) {
+  <div class="error-message">
+    <p>URL not found or you don't have permission to access it.</p>
+  </div>
+  } @else {
+
+  <div class="detail-card">
+    <div class="card-header">
+      <h2>URL Details</h2>
+      @if (urlData()!.canModify) {
+      <div class="header-actions">
+        @if (!isEditing()) {
+        <button (click)="startEdit()" class="btn btn-primary">
+          Edit
+        </button>
+        }
+        <button (click)="deleteUrl()" class="btn btn-danger">
+          Delete
+        </button>
+      </div>
+      }
+    </div>
+
+    <div class="detail-content">
+      <div class="detail-row">
+        <label>Original URL:</label>
+        <div class="detail-value">
+          <a [href]="urlData()!.url" target="_blank" rel="noopener" class="url-link">
+            {{ urlData()!.url }}
+          </a>
+          <button class="copy-btn" (click)="copyToClipboard(urlData()!.url)" title="Copy to clipboard">
+            📋
+          </button>
+        </div>
+      </div>
+
+      <div class="detail-row">
+        <label>Short URL:</label>
+        <div class="detail-value">
+          <code>{{ urlData()!.shortUrl }}</code>
+          <button class="copy-btn" (click)="copyToClipboard(urlData()!.shortUrl)" title="Copy to clipboard">
+            📋
+          </button>
+        </div>
+      </div>
+
+      <div class="detail-row">
+        <label>Title:</label>
+        <div class="detail-value">
+          @if (!isEditing()) {
+          <div class="view-mode">
+            {{ urlData()!.title || '(No title)' }}
+          </div>
+          } @else {
+          <div class="edit-mode">
+            <input type="text" [(ngModel)]="editTitle" class="edit-input" placeholder="Enter title" />
+            <div class="edit-actions">
+              <button (click)="saveTitle()" [disabled]="isSaving()" class="btn btn-primary btn-sm">
+                {{ isSaving() ? 'Saving...' : 'Save' }}
+              </button>
+              <button (click)="cancelEdit()" [disabled]="isSaving()" class="btn btn-secondary btn-sm">
+                Cancel
+              </button>
+            </div>
+          </div>
+          }
+        </div>
+      </div>
+
+      <div class="detail-row">
+        <label>Role:</label>
+        <div class="detail-value">
+          <span class="badge" [class.owner]="urlData()!.isOwner">
+            {{ urlData()!.isOwner ? 'Owner' : 'Viewer' }}
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+  }}
+</div>

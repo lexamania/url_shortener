@@ -6,6 +6,6 @@ public record DetailedUrlDto(
     string ShortUrl,
     string? Title)
 {
-    public bool IsCreator { get; set; }
+    public bool IsOwner { get; set; }
     public bool CanModify { get; set; }
 };
